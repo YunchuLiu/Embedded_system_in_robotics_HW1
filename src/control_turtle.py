@@ -23,6 +23,7 @@ def publish_velocity():
         dy=6*pi/T*cos(2*pi*t/T)
         dx2 = -48*pi*pi*sin((4*pi*t)/T)/(T*T)
         dy2 = -12*pi*pi*sin((2*pi*t)/T)/(T*T)
+        #get derivative for velocity 
         msg.linear.x=dx
         msg.linear.y=dy
         msg.linear.z=0

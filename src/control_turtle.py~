@@ -28,7 +28,7 @@ def publish_velocity():
         msg.linear.z=0
         msg.angular.x=0
         msg.angular.y=0
-        msg.angular.z=((dx*dy2)-(dy*dx2)) /((dx*dx) + (dy*dy))
+        msg.angular.z=0
         pub.publish(msg)
         rate.sleep()
     
