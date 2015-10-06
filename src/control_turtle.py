@@ -21,15 +21,17 @@ def publish_velocity():
         msg=Twist()
         dx=12*pi/T*cos(4*pi*t/T)
         dy=6*pi/T*cos(2*pi*t/T)
+        v = sqrt(dx*dx+dy*dy)
         dx2 = -48*pi*pi*sin((4*pi*t)/T)/(T*T)
         dy2 = -12*pi*pi*sin((2*pi*t)/T)/(T*T)
+        w = ((dx*dy2)-(dy*dx2)) /((dx*dx) + (dy*dy))
         #get derivative for velocity 
-        msg.linear.x=dx
-        msg.linear.y=dy
+        msg.linear.x=v
+        msg.linear.y=0
         msg.linear.z=0
         msg.angular.x=0
         msg.angular.y=0
-        msg.angular.z=0
+        msg.angular.z=w
         pub.publish(msg)
         rate.sleep()
     
