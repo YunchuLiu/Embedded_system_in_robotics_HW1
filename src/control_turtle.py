@@ -45,7 +45,7 @@ def locate_the_turtle_client(x,y,theta):
         print "Service call failed: %s"%e
         
 def main():
-    locate_the_turtle_client(5.45,5.45,0)
+    locate_the_turtle_client(5.45,5.45,pi/8)
     publish_velocity()
         
 main()
