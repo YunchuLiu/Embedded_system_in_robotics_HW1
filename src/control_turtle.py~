@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from math import *
+from std_msgs.msg import String
 
 
 #call the service to locate the turtle
@@ -10,13 +11,13 @@ from geometry_msgs.msg import Twist
 
 def publish_velocity():
     pub=rospy.Publisher('/turtle1/cmd_vel',Twist,queue_size=10)
-    rospy.init_node('publish_velocity', anonymous=True)
+    #rospy.init_node('publish_velocity', anonymous=True)
     rate=rospy.Rate(10)
-    
     base_time=rospy.get_time()
     
     while not rospy.is_shutdown():
-        T=10
+        rospy.set_param('~T',30)
+        T=rospy.get_param('~T')
         t=rospy.get_time()-base_time
         msg=Twist()
         dx=12*pi/T*cos(4*pi*t/T)
@@ -44,11 +45,14 @@ def locate_the_turtle_client(x,y,theta):
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
         
-def main():
-    locate_the_turtle_client(5.45,5.45,pi/2)
-    publish_velocity()
-        
-main()
+if __name__=='__main__':
+    try:
+        rospy.init_node('turtle_velocity', anonymous=False)
+        locate_the_turtle_client(5.45,5.45,pi/8)
+        publish_velocity()
+    except rospy.ROSInterruptException:
+        pass 
+
 
 
      

@@ -1,0 +1,22 @@
+<launch>
+  <node
+    pkg="turtlesim"
+    type="turtlesim_node"
+    name="turtlesim"
+  />
+  <node
+    pkg="control_turtle"
+    type="control_turtle.py"
+    name="turtle_velocity"
+  >
+    <param name="T" value="10"/>
+  </node>
+  <node 
+    pkg="rosbag"
+    name="record"
+    type="record"
+    args="-O $(find control_turtle)/src/control_turtle.bag -l 100 /turtle1/cmd_vel"
+  />
+</launch>
+  
+    
